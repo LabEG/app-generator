@@ -26,12 +26,16 @@
   },
   "homepage": "https://github.com/LabEG/app-generator#readme",
   "dependencies": {
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
     "ts-serializable": "^1.1.5",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "typescript": "^3.3.1",
     "@labeg/code-style": "1.0.5",
-    "tslint": "^5.12.1"
+    "@types/command-line-args": "^5.0.0",
+    "@types/command-line-usage": "^5.0.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1"
   }
 }
