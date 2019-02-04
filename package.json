@@ -1,0 +1,37 @@
+{
+  "name": "app-generator",
+  "version": "0.0.0",
+  "description": "Tools for generate clients applications from swagger",
+  "main": "bin/index.js",
+  "scripts": {
+    "manupdate": "rm -rvf node_modules && npm install",
+    "reinstall": "rm -rvf node_modules && npm install && npm dedupe && npm prune",
+    "fullupdate": "ncu -a && npm run reinstall",
+    "check": "tslint --fix --project ./tsconfig.json",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LabEG/app-generator.git"
+  },
+  "keywords": [
+    "app",
+    "generator"
+  ],
+  "author": "LabEG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LabEG/app-generator/issues"
+  },
+  "homepage": "https://github.com/LabEG/app-generator#readme",
+  "dependencies": {
+    "ts-serializable": "^1.1.5",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.1",
+    "@labeg/code-style": "1.0.5",
+    "tslint": "^5.12.1"
+  }
+}
