@@ -32,9 +32,10 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@labeg/code-style": "1.0.5",
+    "@labeg/code-style": "1.0.7",
     "@types/command-line-args": "^5.0.0",
     "@types/command-line-usage": "^5.0.1",
+    "@types/node": "^10.12.21",
     "tslint": "^5.12.1",
     "typescript": "^3.3.1"
   }
