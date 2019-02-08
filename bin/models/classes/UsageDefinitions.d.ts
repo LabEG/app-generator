@@ -4,14 +4,15 @@ export declare const usageDefinitions: ({
     optionList?: undefined;
 } | {
     header: string;
-    optionList: ({
-        name: string;
-        typeLabel: string;
-        description: string;
-    } | {
+    optionList: {
         name: string;
         description: string;
-        typeLabel?: undefined;
-    })[];
+        alias: string;
+        type: BooleanConstructor;
+    }[];
     content?: undefined;
+} | {
+    content: string;
+    header?: undefined;
+    optionList?: undefined;
 })[];
