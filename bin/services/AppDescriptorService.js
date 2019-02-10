@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AppDescriptor_1 = require("../models/classes/AppDescriptor");
+var AppDescription_1 = require("../models/classes/AppDescription");
 var AppDescriptorService = /** @class */ (function () {
     function AppDescriptorService() {
     }
     AppDescriptorService.prototype.fromJson = function (data) {
-        return new AppDescriptor_1.AppDescriptor();
+        var appDescription = new AppDescription_1.AppDescription();
+        return appDescription;
     };
     return AppDescriptorService;
 }());
