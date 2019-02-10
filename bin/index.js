@@ -1,6 +1,7 @@
 "use strict";
-// tslint:disable:file-name-casing
+// tslint:disable:file-name-casing no-console
 Object.defineProperty(exports, "__esModule", { value: true });
+// tslint:disable-next-line:no-import-side-effect
 require("reflect-metadata");
 var commandLineArgs = require("command-line-args");
 var commandLineUsage = require("command-line-usage");
@@ -10,12 +11,9 @@ var UsageDefinitions_1 = require("./models/classes/UsageDefinitions");
 var DefinitionsService_1 = require("./services/DefinitionsService");
 var options = commandLineArgs(OptionsDefinitions_1.optionDefinitions);
 var usage = commandLineUsage(UsageDefinitions_1.usageDefinitions);
-// tslint:disable:no-console
-console.log("222222222222", options);
 function printUsage(e) {
-    console.log("222222222222", options);
     if (e) {
-        console.log("Error: ", e.message);
+        console.log("\nError: ", e.message);
     }
     console.log(usage);
     process.exit(-1);
@@ -25,13 +23,22 @@ if (options.help) {
 }
 try {
     var prOptions = new DefinitionsService_1.DefinitionsService().toProjectOptions(options);
-    https.get(options.source, {}, function (response) {
-        response.setEncoding("utf8");
-        response.on("data", function (chunk) {
-            console.log(chunk);
+    prOptions.forEach(function (prOption) {
+        https
+            .get(prOption.source, {}, function (response) {
+            response.setEncoding("utf8");
+            var swaggerJson = "";
+            response.on("data", function (chunk) {
+                swaggerJson = chunk;
+            });
+            response.on("end", function () {
+                console.log(swaggerJson);
+            });
+        })
+            .on("error", function (err) {
+            console.log("Error: " + err.message);
         });
     });
-    console.log("1111111111111111111", prOptions);
 }
 catch (e) {
     printUsage(e);

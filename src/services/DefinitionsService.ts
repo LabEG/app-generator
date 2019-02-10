@@ -2,8 +2,8 @@
 import * as commandLineArgs from "command-line-args";
 import { ProjectOptions } from "../models/classes/ProjectOptions";
 
-export class DefinitionsService {
-    public toProjectOptions(options: commandLineArgs.CommandLineOptions): ProjectOptions[] {
+export class ProjectOptionsService {
+    public fromDefinitionOpts(options: commandLineArgs.CommandLineOptions): ProjectOptions[] {
         if (options.project && options.source) {
             throw new Error(`Can't set "--project" and "--source" option, must by one.`);
         } else if (options.project) {

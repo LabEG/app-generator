@@ -1,5 +1,6 @@
-// tslint:disable:file-name-casing
+// tslint:disable:file-name-casing no-console
 
+// tslint:disable-next-line:no-import-side-effect
 import "reflect-metadata";
 
 import * as commandLineArgs from "command-line-args";
@@ -9,34 +10,47 @@ import * as http from "http";
 
 import { optionDefinitions } from "./models/classes/OptionsDefinitions";
 import { usageDefinitions } from "./models/classes/UsageDefinitions";
-import { DefinitionsService } from "./services/DefinitionsService";
+import { ProjectOptionsService } from "./services/DefinitionsService";
 import { ProjectOptions } from "./models/classes/ProjectOptions";
+import { AppDescriptorService } from './services/AppDescriptorService';
 
-const options = commandLineArgs(optionDefinitions);
+const defOptions = commandLineArgs(optionDefinitions);
 const usage = commandLineUsage(usageDefinitions);
 
-// tslint:disable:no-console
 function printUsage(e?: Error): void {
     if (e) {
-        console.log("\nError: ", e.message);
+        console.log("\n%cError: ", e.message, "color:red");
     }
     console.log(usage);
     process.exit(-1);
 }
 
-if (options.help) {
+if (defOptions.help) {
     printUsage();
 }
 
+const projectOptsService = new ProjectOptionsService();
+const appDescriptorService = new AppDescriptorService();
+
 try {
-    const prOptions: ProjectOptions[] = new DefinitionsService().toProjectOptions(options);
-    https.get(options.source, {}, (response: http.IncomingMessage) => {
-        response.setEncoding("utf8");
-        response.on("data", function(chunk) {
-            console.log(chunk);
-        });
+    const prOptions: ProjectOptions[] = projectOptsService.fromDefinitionOpts(defOptions);
+    prOptions.forEach((prOption) => {
+        https
+            .get(prOption.source, {}, (response: http.IncomingMessage) => {
+                response.setEncoding("utf8");
+                let swaggerJson: string = "";
+                response.on("data", function (chunk) {
+                    swaggerJson = chunk;
+                });
+                response.on("end", () => {
+                    const appDescriptor = appDescriptorService.fromJson(JSON.parse(swaggerJson));
+                    console.log(appDescriptor);
+                });
+            })
+            .on("error", (err) => {
+                console.log(`%cError: ${err.message}`, "color:red");
+            });
     });
-    console.log("1111111111111111111", prOptions);
 } catch (e) {
     printUsage(e);
 }

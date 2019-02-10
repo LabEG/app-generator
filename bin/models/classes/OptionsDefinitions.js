@@ -6,9 +6,9 @@ exports.optionDefinitions = [
     { name: "project", alias: "p", type: String },
     { name: "source", alias: "s", type: String },
     { name: "name", alias: "n", type: String },
-    { name: "rootDir", alias: "rd", type: String },
-    { name: "modelsDir", alias: "md", type: String },
-    { name: "servicesDir", alias: "sd", type: String },
-    { name: "repositoriesDir", alias: "pd", type: String }
+    { name: "rootDir", type: String },
+    { name: "modelsDir", type: String },
+    { name: "servicesDir", type: String },
+    { name: "repositoriesDir", type: String }
 ];
 //# sourceMappingURL=OptionsDefinitions.js.map
