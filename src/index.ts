@@ -16,11 +16,9 @@ const options = commandLineArgs(optionDefinitions);
 const usage = commandLineUsage(usageDefinitions);
 
 // tslint:disable:no-console
-console.log("222222222222", options);
 function printUsage(e?: Error): void {
-    console.log("222222222222", options);
     if (e) {
-        console.log("Error: ", e.message);
+        console.log("\nError: ", e.message);
     }
     console.log(usage);
     process.exit(-1);
