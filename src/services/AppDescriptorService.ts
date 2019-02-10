@@ -1,8 +1,8 @@
-import { AppDescriptor } from '../models/classes/AppDescriptor';
-import { ISwaggerJson } from '../models/interfaces/ISwaggerJson';
+import { AppDescriptor } from "../models/classes/AppDescriptor";
+import { ISwagger } from "../models/interfaces/ISwagger";
 
 export class AppDescriptorService {
-    public fromJson(data: ISwaggerJson): AppDescriptor {
+    public fromJson(data: ISwagger): AppDescriptor {
         return new AppDescriptor();
     }
 }

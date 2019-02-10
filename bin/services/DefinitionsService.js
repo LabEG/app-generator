@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ProjectOptions_1 = require("../models/classes/ProjectOptions");
-var DefinitionsService = /** @class */ (function () {
-    function DefinitionsService() {
+var ProjectOptionsService = /** @class */ (function () {
+    function ProjectOptionsService() {
     }
-    DefinitionsService.prototype.toProjectOptions = function (options) {
+    ProjectOptionsService.prototype.fromDefinitionOpts = function (options) {
         if (options.project && options.source) {
             throw new Error("Can't set \"--project\" and \"--source\" option, must by one.");
         }
@@ -18,13 +18,13 @@ var DefinitionsService = /** @class */ (function () {
             throw new Error("Must by set \"--project\" or \"--source\" option.");
         }
     };
-    DefinitionsService.prototype.projectOptionsFromProject = function () {
+    ProjectOptionsService.prototype.projectOptionsFromProject = function () {
         return [];
     };
-    DefinitionsService.prototype.projectOptionsFromOptionsDefinitions = function (options) {
+    ProjectOptionsService.prototype.projectOptionsFromOptionsDefinitions = function (options) {
         return new ProjectOptions_1.ProjectOptions().fromJSON(options);
     };
-    return DefinitionsService;
+    return ProjectOptionsService;
 }());
-exports.DefinitionsService = DefinitionsService;
+exports.ProjectOptionsService = ProjectOptionsService;
 //# sourceMappingURL=DefinitionsService.js.map

@@ -12,7 +12,7 @@ import { optionDefinitions } from "./models/classes/OptionsDefinitions";
 import { usageDefinitions } from "./models/classes/UsageDefinitions";
 import { ProjectOptionsService } from "./services/DefinitionsService";
 import { ProjectOptions } from "./models/classes/ProjectOptions";
-import { AppDescriptorService } from './services/AppDescriptorService';
+import { AppDescriptorService } from "./services/AppDescriptorService";
 
 const defOptions = commandLineArgs(optionDefinitions);
 const usage = commandLineUsage(usageDefinitions);
@@ -39,7 +39,7 @@ try {
             .get(prOption.source, {}, (response: http.IncomingMessage) => {
                 response.setEncoding("utf8");
                 let swaggerJson: string = "";
-                response.on("data", function (chunk) {
+                response.on("data", function(chunk) {
                     swaggerJson = chunk;
                 });
                 response.on("end", () => {
