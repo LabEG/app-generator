@@ -10,6 +10,7 @@ export class AppModel {
 export class AppControllerMethod {
     public method: string = "";
     public path: string = "";
+    public name: string = "";
 }
 
 export class AppController {

@@ -1,6 +1,7 @@
 import { AppDescription, AppController, AppControllerMethod } from '../models/classes/AppDescription';
 import { ISwagger } from "../models/interfaces/ISwagger";
 import { logger } from "../utils/Logger";
+import { ISwaggerPath } from '../../bin/models/interfaces/ISwagger';
 
 export class AppDescriptionService {
     public fromJson(data: ISwagger): AppDescription {
@@ -30,14 +31,15 @@ export class AppDescriptionService {
             // set method
             const methods = Reflect.ownKeys(patchObj);
             methods.forEach((method: string) => {
-                // const methodObj = Reflect.get(patchObj, method);
+                const methodObj: ISwaggerPath = Reflect.get(patchObj, method);
                 logger.log("verbose", "Method: %s", method);
 
                 const appMethod = new AppControllerMethod();
+                appMethod.name = methodObj.operationId;
                 appMethod.method = method;
                 appMethod.path = path;
 
-                appController!.methods.set(method, appMethod);
+                appController!.methods.set(appMethod.name, appMethod);
             });
 
         });
